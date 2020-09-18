@@ -1,5 +1,6 @@
 const express = require('express');
 const cors = require('express-cors');
+const path = require('path');
 const testimonialsRoutes = require('./routes/testimonials.routes');
 const concertsRoutes = require('./routes/concerts.routes');
 const seatsRoutes = require('./routes/seats.routes');
@@ -10,17 +11,17 @@ app.set('view engine', '.hbs');
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
-app.use(cors({
-  origin: ['localhost:3000',]
-}));
+app.use(cors());
 
-app.get('/', (req, res) => {
-  res.send('my app');
-});
+app.use(express.static(path.join(__dirname, '/client/build')));
 
 app.use('/api/testimonials', testimonialsRoutes);
 app.use('/api/concerts', concertsRoutes);
 app.use('/api/seats', seatsRoutes);
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '/client/build/index.html'));
+});
 
 app.use((req, res) => {
   res.status(404).json({ message: 'Not Found...' });
