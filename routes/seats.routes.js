@@ -13,14 +13,25 @@ router.route('/:id').get((req, res) => {
 });
 
 router.route('/').post((req, res) => {
-  const { author, text } = req.body;
+  const seatFilter = db.seats.filter(seat => seat.day == req.body.day);
+  if (seatFilter.some(seat => seat.seat == req.body.seat)) {
+    res.status(403).json({ message: 'The slot is already taken...' });
 
-  if (author && text) {
-    res.send({ message: 'ok' });
-  } else {
-    res.json({ message: 'NOT OK' });
   }
-  res.json('seats');
+  else {
+    const newId = db.seats[db.seats.length - 1].id + 1;
+    db.seats.push({
+      id: newId,
+      day: req.body.day,
+      seat: req.body.seat,
+      client: req.body.client,
+      email: req.body.email,
+    });
+    res.json({ client: req.body.client })
+    res.json({ message: 'OK' });
+  }
+
+
 });
 
 router.route('/:id').put((req, res) => {

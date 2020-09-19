@@ -3,7 +3,7 @@ import { Button, Form, FormGroup, Label, Input, Row, Col, Alert, Progress } from
 
 import './OrderTicketForm.scss';
 import SeatChooser from './../SeatChooser/SeatChooserContainer';
-/* eslint-disable */
+
 class OrderTicketForm extends React.Component {
 
   state = {
@@ -39,7 +39,7 @@ class OrderTicketForm extends React.Component {
 
   submitForm = async (e) => {
     const { order } = this.state;
-    const { addSeat } = this.props;
+    const { addSeat, loadSeats } = this.props;
 
     e.preventDefault();
 
@@ -54,6 +54,7 @@ class OrderTicketForm extends React.Component {
         },
         isError: false,
       });
+      await loadSeats()
     } else {
       this.setState({ isError: true });
     }
