@@ -4,7 +4,8 @@
     "express-cors": "^0.0.3",
     "express-handlebars": "3.1.0",
     "node-sass": "^4.14.1",
-    "nodemon": "^2.0.4"
+    "nodemon": "^2.0.4",
+    "socket.io": "^2.3.0"
   },
   "scripts": {
     "start": "nodemon server.js",
