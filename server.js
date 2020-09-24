@@ -8,6 +8,7 @@ const socket = require('socket.io');
 
 const app = express();
 
+
 app.set('view engine', '.hbs');
 
 app.use(express.urlencoded({ extended: false }));
@@ -35,6 +36,8 @@ app.use((req, res) => {
 
 const io = socket(server);
 
-io.on('connection'), (socket) => {
-  console.log('new user', socket.id);
-}
+io.on('connection', (socket) => {
+  console.log('New client! Its id – ' + socket.id);
+  //console.log(users);
+
+});
