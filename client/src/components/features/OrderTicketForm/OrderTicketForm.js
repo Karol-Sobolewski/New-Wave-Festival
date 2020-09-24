@@ -54,7 +54,7 @@ class OrderTicketForm extends React.Component {
         },
         isError: false,
       });
-      await loadSeats()
+      //await loadSeats()
     } else {
       this.setState({ isError: true });
     }
