@@ -3,15 +3,20 @@
     "express": "4.17.1",
     "express-cors": "^0.0.3",
     "express-handlebars": "3.1.0",
+    "helmet": "3.21.1",
     "mongo-sanitize": "1.0.1",
     "mongodb": "3.3.2",
-    "mongoose": "5.7.1",
+    "mongoose": "5.7.5",
     "node-sass": "^4.14.1",
     "nodemon": "^2.0.4",
     "socket.io": "^2.3.0"
   },
   "scripts": {
     "start": "nodemon server.js",
-    "build": "cd client && yarn install && yarn build"
+    "build": "cd client && yarn install && yarn build",
+    "test": "snyk test"
+  },
+  "devDependencies": {
+    "snyk": "^1.406.0"
   }
 }

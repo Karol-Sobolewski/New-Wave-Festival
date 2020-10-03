@@ -1,4 +1,5 @@
 const express = require('express');
+const helmet = require('helmet');
 const cors = require('express-cors');
 const path = require('path');
 const socket = require('socket.io');
@@ -8,6 +9,8 @@ const seatsRoutes = require('./routes/seats.routes');
 const mongoose = require('mongoose');
 
 const app = express();
+
+app.use(helmet());
 
 
 app.set('view engine', '.hbs');
