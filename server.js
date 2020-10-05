@@ -39,7 +39,7 @@ app.use((req, res) => {
   res.status(404).json({ message: 'Not Found...' });
 });
 
-mongoose.connect(`mongodb+srv://${process.env.DB_LOGIN}:L540NpnMkeuJBc83@newwavefestival.ohx0i.mongodb.net/neWaveDB?retryWrites=true&w=majority`, { useNewUrlParser: true });
+mongoose.connect(`mongodb+srv://${process.env.DB_LOGIN}:${process.env.DB_PASS}@newwavefestival.ohx0i.mongodb.net/neWaveDB?retryWrites=true&w=majority`, { useNewUrlParser: true });
 const db = mongoose.connection;
 
 db.once('open', () => {
