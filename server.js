@@ -3,18 +3,16 @@ const helmet = require('helmet');
 const cors = require('express-cors');
 const path = require('path');
 const socket = require('socket.io');
+const mongoose = require('mongoose');
 const testimonialsRoutes = require('./routes/testimonials.routes');
 const concertsRoutes = require('./routes/concerts.routes');
 const seatsRoutes = require('./routes/seats.routes');
-const mongoose = require('mongoose');
-
+/* eslint-disable */
 const app = express();
 
 app.use(helmet());
 
-
 app.set('view engine', '.hbs');
-
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
@@ -39,28 +37,32 @@ app.use((req, res) => {
   res.status(404).json({ message: 'Not Found...' });
 });
 
-mongoose.connect(`mongodb+srv://${process.env.DB_LOGIN}:${process.env.DB_PASS}@newwavefestival.ohx0i.mongodb.net/neWaveDB?retryWrites=true&w=majority`, { useNewUrlParser: true });
+
+const dbURI = process.env.NODE_ENV === 'production' ? `mongodb+srv://${process.env.DB_LOGIN}:${
+  process.env.DB_PASS
+}@newwavefestival.ohx0i.mongodb.net/neWaveDB?retryWrites=true&w=majority` : `mongodb://localhost:27017/newWaveDB`;
+mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true });
 const db = mongoose.connection;
+
 
 db.once('open', () => {
   console.log('Connected to the database');
 });
-db.on('error', err => console.log('Error ' + err));
+db.on('error', err => console.log(`Error ${err}`));
 
 const server = app.listen(process.env.PORT || '8000', () => {
   console.log('Server is running on port: 8000');
 });
 
-
 const io = socket(server);
 
-io.on('connection', (socket) => {
-    console.log('New client! Its id – ' + socket.id);
-    /*socket.on('seatsUpdated', (seat) => {
+io.on('connection', socket => {
+  console.log(`New client! Its id – ${socket.id}`);
+  /* socket.on('seatsUpdated', (seat) => {
       console.log('Update');
       
-  });*/
+  }); */
   socket.on('disconnect', () => {
-        console.log('Oh, socket ' + socket.id + ' has left')
-    });
+    console.log(`Oh, socket ${socket.id} has left`);
+  });
 });
