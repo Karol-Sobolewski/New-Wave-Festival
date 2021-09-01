@@ -12,7 +12,7 @@
     "mongo-sanitize": "1.0.1",
     "mongodb": "3.3.2",
     "mongoose": "5.7.5",
-    "node-sass": "^4.14.1",
+    "node-sass": "^5.0.0",
     "nodemon": "^2.0.4",
     "socket.io": "^2.3.0"
   },
