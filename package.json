@@ -5,7 +5,7 @@
     "expect.js": "^0.3.1",
     "express": "4.17.1",
     "express-cors": "^0.0.3",
-    "express-handlebars": "3.1.0",
+    "express-handlebars": "7.0.0",
     "helmet": "3.21.1",
     "jest": "^26.6.3",
     "mocha": "6.2.1",
