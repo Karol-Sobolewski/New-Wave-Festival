@@ -1,7 +1,7 @@
 {
   "dependencies": {
     "chai": "4.2.0",
-    "chai-http": "^4.3.0",
+    "chai-http": "^5.0.0",
     "expect.js": "^0.3.1",
     "express": "4.17.1",
     "express-cors": "^0.0.3",
